@@ -5,1549 +5,559 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="google" content="notranslate">
     <title>Набор в команду | IronMine</title>
-
-    <!-- ============================================================
-    НАСТРОЙКИ НАБОРОВ (меняй тут перед заливкой на GitHub Pages)
-    true = набор открыт | false = набор закрыт
-    ============================================================ -->
     <script>
-        const RECRUITMENT_SETTINGS = {
-            personnel: true,
-            support: true,
-            media: true
-        };
+        const RECRUITMENT_SETTINGS = { personnel: true, support: true, media: true };
     </script>
-    <!-- ============================================================ -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat+Alternates:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
             --bg: #f0f4f8;
-            --card: rgba(255, 255, 255, 0.88);
-            --glass: rgba(255, 255, 255, 0.55);
-            --border: rgba(76, 175, 80, 0.15);
+            --card: rgba(255,255,255,0.9);
+            --glass: rgba(255,255,255,0.6);
+            --border: rgba(76,175,80,0.2);
             --accent: #43a047;
             --accent-light: #66bb6a;
             --accent-dark: #2e7d32;
-            --accent-glow: rgba(67, 160, 71, 0.2);
+            --accent-glow: rgba(67,160,71,0.25);
             --accent2: #1565c0;
-            --accent2-light: #1976d2;
-            --accent2-glow: rgba(25, 118, 210, 0.2);
+            --accent2-light: #42a5f5;
+            --accent2-glow: rgba(21,101,192,0.25);
             --accent3: #e65100;
             --accent3-light: #ff6d00;
-            --accent3-glow: rgba(230, 81, 0, 0.2);
+            --accent3-glow: rgba(230,81,0,0.25);
             --text: #1a1a2e;
             --text-secondary: #5a6a7a;
-            --text-muted: #8a9aa8;
             --heading: #0d1b0d;
-            --input-bg: #ffffff;
+            --input-bg: #fff;
             --input-border: #dce5e8;
-            --input-focus: #43a047;
-            --radio-bg: #e8f5e9;
             --danger: #e53935;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.10);
-            --shadow-glow: 0 8px 32px rgba(67, 160, 71, 0.15);
+            --danger-light: #ffebee;
+            --shadow: 0 8px 32px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 40px rgba(0,0,0,0.10);
             --radius: 20px;
-            --radius-sm: 12px;
-            --radius-xs: 8px;
+            --radius-sm: 14px;
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-xs: 12px;
+            --font-base: 16px;
             --font-sm: 14px;
-            --font-base: 15px;
-            --font-lg: 17px;
-            --font-xl: 20px;
-            --font-2xl: 24px;
-            --font-3xl: clamp(28px, 5vw, 38px);
+            --font-lg: 18px;
+            --font-xl: 22px;
+            --font-2xl: 26px;
+            --font-3xl: 32px;
         }
         body.dark {
             --bg: #0a0e1a;
-            --card: rgba(15, 20, 35, 0.92);
-            --glass: rgba(15, 20, 35, 0.7);
-            --border: rgba(102, 187, 106, 0.12);
+            --card: rgba(18,25,45,0.92);
+            --glass: rgba(18,25,45,0.7);
+            --border: rgba(102,187,106,0.12);
             --accent: #66bb6a;
             --accent-light: #81c784;
             --accent-dark: #4caf50;
-            --accent-glow: rgba(102, 187, 106, 0.15);
+            --accent-glow: rgba(102,187,106,0.2);
             --accent2: #42a5f5;
             --accent2-light: #64b5f6;
-            --accent2-glow: rgba(66, 165, 245, 0.15);
+            --accent2-glow: rgba(66,165,245,0.2);
             --accent3: #ff6d00;
             --accent3-light: #ff9100;
-            --accent3-glow: rgba(255, 109, 0, 0.15);
+            --accent3-glow: rgba(255,109,0,0.2);
             --text: #d0d8e8;
             --text-secondary: #8899aa;
-            --text-muted: #667788;
             --heading: #e8edf5;
             --input-bg: #141b2b;
             --input-border: #2a3344;
-            --input-focus: #66bb6a;
-            --radio-bg: #0f1a0f;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.6);
-            --shadow-glow: 0 8px 32px rgba(102, 187, 106, 0.1);
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            min-height: 100dvh;
-            padding: 16px;
-            padding-bottom: max(60px, env(safe-area-inset-bottom, 20px));
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            transition: background 0.3s, color 0.3s;
-            background-image:
-                radial-gradient(ellipse at 10% 20%, rgba(67, 160, 71, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 90% 80%, rgba(102, 187, 106, 0.03) 0%, transparent 60%);
-            background-attachment: fixed;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            font-size: var(--font-base);
-            line-height: 1.6;
-        }
-        body.dark {
-            background-image:
-                radial-gradient(ellipse at 10% 20%, rgba(102, 187, 106, 0.03) 0%, transparent 60%),
-                radial-gradient(ellipse at 90% 80%, rgba(129, 199, 132, 0.02) 0%, transparent 60%);
-        }
-        input,
-        textarea {
-            user-select: text;
-            -webkit-user-select: text;
-            -webkit-touch-callout: default;
-        }
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 820px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 32px 28px;
-            background: var(--card);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-            transition: all var(--transition);
-            animation: containerIn 0.5s ease;
-        }
-        @keyframes containerIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .container.wide {
-            max-width: 1100px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .brand-logo {
-            font-family: 'Montserrat Alternates', sans-serif;
-            font-weight: 900;
-            font-size: var(--font-xl);
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        .brand-logo i {
-            -webkit-text-fill-color: var(--accent);
-            font-size: 24px;
-        }
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 9px 18px;
-            border: none;
-            border-radius: 50px;
-            font-size: var(--font-xs);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #fff;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            white-space: nowrap;
-            letter-spacing: 0.2px;
-        }
-        .btn:active {
-            transform: scale(0.94);
-        }
-        .btn-theme {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            box-shadow: 0 4px 16px var(--accent-glow);
-        }
-        .btn-theme:hover {
-            box-shadow: 0 6px 24px var(--accent-glow);
-            transform: translateY(-1px);
-        }
-        .btn-admin {
-            background: linear-gradient(135deg, var(--accent2), var(--accent2-light));
-            box-shadow: 0 4px 16px var(--accent2-glow);
-        }
-        .btn-admin:hover {
-            box-shadow: 0 6px 24px var(--accent2-glow);
-            transform: translateY(-1px);
-        }
-        .btn-back {
-            background: var(--glass);
-            color: var(--text) !important;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-        }
-        .btn-back:hover {
-            background: var(--input-border);
-            transform: translateY(-1px);
-        }
-        .btn-danger {
-            background: var(--danger);
-            color: #fff !important;
-        }
-        .btn-danger:hover {
-            background: #c62828;
-            transform: translateY(-1px);
-        }
-        .main-title {
-            text-align: center;
-            font-size: var(--font-3xl);
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            padding-bottom: 14px;
-            margin-bottom: 14px;
-            border-bottom: 2px solid var(--border);
-            position: relative;
-        }
-        .main-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            border-radius: 4px;
-        }
-        .main-title .gradient-text {
-            font-family: 'Montserrat Alternates', sans-serif;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--accent-dark), var(--accent-light));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientMove 6s ease infinite;
-        }
-        @keyframes gradientMove {
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-        .sub-header {
-            text-align: center;
-            font-size: var(--font-sm);
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .sub-header a {
-            color: var(--accent);
-            font-weight: 700;
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-        .sub-header a:hover {
-            color: var(--accent-light);
-            text-decoration: underline;
-        }
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        .direction-card {
-            background: var(--glass);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all var(--transition);
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .direction-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-        .direction-card:active {
-            transform: scale(0.97);
-        }
-        .direction-card.personnel {
-            border-left: 4px solid var(--accent);
-        }
-        .direction-card.personnel:hover {
-            border-color: var(--accent);
-            box-shadow: 0 12px 40px var(--accent-glow);
-        }
-        .direction-card.support {
-            border-left: 4px solid var(--accent2);
-        }
-        .direction-card.support:hover {
-            border-color: var(--accent2);
-            box-shadow: 0 12px 40px var(--accent2-glow);
-        }
-        .direction-card.media {
-            border-left: 4px solid var(--accent3);
-        }
-        .direction-card.media:hover {
-            border-color: var(--accent3);
-            box-shadow: 0 12px 40px var(--accent3-glow);
-        }
-        .direction-card .card-icon {
-            font-size: 44px;
-            transition: transform var(--transition);
-        }
-        .direction-card:hover .card-icon {
-            transform: scale(1.1);
-        }
-        .direction-card.personnel .card-icon {
-            color: var(--accent);
-        }
-        .direction-card.support .card-icon {
-            color: var(--accent2);
-        }
-        .direction-card.media .card-icon {
-            color: var(--accent3);
-        }
-        .direction-card .card-title {
-            font-family: 'Montserrat Alternates', sans-serif;
-            font-weight: 800;
-            font-size: var(--font-lg);
-            color: var(--heading);
-        }
-        .direction-card .card-desc {
-            font-size: var(--font-xs);
-            color: var(--text-secondary);
-            line-height: 1.5;
-            max-width: 250px;
-        }
-        .direction-card .card-badge {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-        .direction-card.personnel .card-badge {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        .direction-card.support .card-badge {
-            background: #e3f2fd;
-            color: #0d47a1;
-        }
-        .direction-card.media .card-badge {
-            background: #fff3e0;
-            color: #bf360c;
-        }
-        body.dark .direction-card.personnel .card-badge {
-            background: #0f1a0f;
-            color: #81c784;
-        }
-        body.dark .direction-card.support .card-badge {
-            background: #001a2a;
-            color: #64b5f6;
-        }
-        body.dark .direction-card.media .card-badge {
-            background: #2a1000;
-            color: #ffab40;
-        }
-        .closed-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: var(--font-lg);
-            color: #fff;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-            pointer-events: none;
-            letter-spacing: 0.5px;
-        }
-        .info-banner {
-            border-radius: var(--radius-sm);
-            padding: 14px 18px;
-            margin-bottom: 20px;
-            font-size: var(--font-xs);
-            line-height: 1.7;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            border: 1px solid;
-        }
-        .info-banner.personnel-banner {
-            background: #e8f5e9;
-            border-color: var(--accent);
-            color: var(--text-secondary);
-        }
-        .info-banner.support-banner {
-            background: #e3f2fd;
-            border-color: var(--accent2);
-            color: var(--text-secondary);
-        }
-        .info-banner.media-banner {
-            background: #fff3e0;
-            border-color: var(--accent3);
-            color: var(--text-secondary);
-        }
-        body.dark .info-banner.personnel-banner {
-            background: #0f1a0f;
-        }
-        body.dark .info-banner.support-banner {
-            background: #001a2a;
-        }
-        body.dark .info-banner.media-banner {
-            background: #2a1000;
-        }
-        .info-banner i {
-            font-size: 20px;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-        .info-banner.personnel-banner i {
-            color: var(--accent);
-        }
-        .info-banner.support-banner i {
-            color: var(--accent2);
-        }
-        .info-banner.media-banner i {
-            color: var(--accent3);
-        }
-        .section {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--accent);
-            transition: all var(--transition);
-            animation: fadeUp 0.4s ease forwards;
-            opacity: 0;
-        }
-        .section:nth-child(1) {
-            animation-delay: 0.03s;
-        }
-        .section:nth-child(2) {
-            animation-delay: 0.06s;
-        }
-        .section:nth-child(3) {
-            animation-delay: 0.09s;
-        }
-        .section:nth-child(4) {
-            animation-delay: 0.12s;
-        }
-        .section.support-section {
-            border-left-color: var(--accent2);
-        }
-        .section.media-section {
-            border-left-color: var(--accent3);
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .section:hover {
-            box-shadow: var(--shadow-hover);
-        }
-        .section-title {
-            font-family: 'Montserrat Alternates', sans-serif;
-            font-weight: 800;
-            font-size: var(--font-lg);
-            color: var(--heading);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .section-title .icon {
-            font-size: 20px;
-        }
-        .icon.green {
-            color: var(--accent);
-        }
-        .icon.blue {
-            color: var(--accent2);
-        }
-        .icon.orange {
-            color: var(--accent3);
-        }
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group:last-child {
-            margin-bottom: 0;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            font-size: var(--font-sm);
-            margin-bottom: 6px;
-            color: var(--heading);
-        }
-        label .required {
-            color: var(--danger);
-            font-weight: 700;
-            margin-left: 2px;
-        }
-        label .hint {
-            display: block;
-            font-weight: 400;
-            font-size: var(--font-xs);
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-        input[type="text"],
-        input[type="number"],
-        input[type="password"],
-        textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--input-border);
-            border-radius: var(--radius-sm);
-            font-size: var(--font-sm);
-            font-family: 'Inter', sans-serif;
-            background: var(--input-bg);
-            color: var(--text);
-            transition: all var(--transition);
-            outline: none;
-            resize: vertical;
-            -webkit-appearance: none;
-        }
-        input:focus,
-        textarea:focus {
-            border-color: var(--input-focus);
-            box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.08);
-        }
-        textarea {
-            min-height: 100px;
-            line-height: 1.7;
-        }
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 16px;
-            background: var(--input-bg);
-            border: 2px solid var(--input-border);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all var(--transition);
-            font-size: var(--font-sm);
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .radio-option:hover {
-            border-color: var(--accent-light);
-            transform: translateX(3px);
-        }
-        .radio-option input[type="radio"] {
-            accent-color: var(--accent);
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-        .radio-option.selected {
-            border-color: var(--accent);
-            background: rgba(67, 160, 71, 0.06);
-            box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.06);
-            transform: translateX(4px);
-        }
-        .other-input {
-            margin-top: 6px;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 16px 24px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: var(--font-base);
-            font-weight: 800;
-            cursor: pointer;
-            color: #fff;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            box-shadow: 0 6px 24px var(--accent-glow);
-            transition: all var(--transition);
-            letter-spacing: 0.3px;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            margin-top: 8px;
-        }
-        .submit-btn:active {
-            transform: scale(0.96);
-        }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 32px var(--accent-glow);
-        }
-        .submit-btn.support-btn {
-            background: linear-gradient(135deg, var(--accent2), var(--accent2-light));
-            box-shadow: 0 6px 24px var(--accent2-glow);
-        }
-        .submit-btn.support-btn:hover {
-            box-shadow: 0 10px 32px var(--accent2-glow);
-        }
-        .submit-btn.media-btn {
-            background: linear-gradient(135deg, var(--accent3), var(--accent3-light));
-            box-shadow: 0 6px 24px var(--accent3-glow);
-        }
-        .submit-btn.media-btn:hover {
-            box-shadow: 0 10px 32px var(--accent3-glow);
-        }
-        .success-block {
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .success-block.show {
-            display: block;
-            animation: successIn 0.5s ease;
-        }
-        @keyframes successIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .success-icon {
-            font-size: 72px;
-            margin-bottom: 14px;
-            animation: successBounce 0.6s ease;
-        }
-        @keyframes successBounce {
-            0% {
-                transform: scale(0);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-            70% {
-                transform: scale(0.95);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        .success-title {
-            font-family: 'Montserrat Alternates', sans-serif;
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--heading);
-            margin-bottom: 10px;
-        }
-        .success-text {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 18px;
-            font-size: var(--font-sm);
-        }
-        .success-text strong {
-            color: var(--heading);
-        }
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--heading);
-            color: var(--bg);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: var(--font-xs);
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            pointer-events: none;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 90vw;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        body.dark .toast {
-            background: #e0e8f0;
-            color: #1a1a2e;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        .scroll-top {
-            position: fixed;
-            bottom: 24px;
-            right: 20px;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            z-index: 998;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all var(--transition);
-            box-shadow: 0 4px 18px var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .scroll-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .scroll-top:active {
-            transform: scale(0.9);
-        }
-        .admin-tabs {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .admin-tab {
-            padding: 8px 16px;
-            border: 2px solid var(--input-border);
-            border-radius: 50px;
-            background: var(--input-bg);
-            font-weight: 700;
-            font-size: var(--font-xs);
-            cursor: pointer;
-            transition: all var(--transition);
-            color: var(--text);
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .admin-tab.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-        .toggle-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            padding: 8px 12px;
-            background: var(--glass);
-            border-radius: var(--radius-xs);
-            border: 1px solid var(--border);
-        }
-        .toggle-label {
-            font-weight: 700;
-            font-size: var(--font-xs);
-            color: var(--heading);
-            min-width: 100px;
-        }
-        .toggle-switch {
-            position: relative;
-            width: 48px;
-            height: 26px;
-            flex-shrink: 0;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            inset: 0;
-            background: #ccc;
-            border-radius: 26px;
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-        .toggle-slider::before {
-            content: '';
-            position: absolute;
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background: #fff;
-            border-radius: 50%;
-            transition: all var(--transition);
-        }
-        input:checked+.toggle-slider {
-            background: var(--accent);
-        }
-        input:checked+.toggle-slider::before {
-            transform: translateX(22px);
-        }
-        .toggle-status {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-        .toggle-hint {
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-left: 4px;
-        }
-        .table-wrapper {
-            overflow-x: auto;
-            max-height: 50vh;
-            overflow-y: auto;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            margin-top: 12px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .table-wrapper::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        .table-wrapper::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
-        .table-wrapper::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: var(--font-xs);
-        }
-        .admin-table th {
-            padding: 12px 10px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            font-weight: 700;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-            text-align: left;
-            white-space: nowrap;
-        }
-        .admin-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-            vertical-align: middle;
-        }
-        .admin-table tr:hover td {
-            background: var(--radio-bg);
-        }
-        .admin-table .expand-btn,
-        .admin-table .delete-btn {
-            padding: 5px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
-            transition: all var(--transition);
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .admin-table .expand-btn {
-            background: var(--glass);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-        }
-        .admin-table .expand-btn:hover {
-            background: var(--accent);
-            color: #fff;
-        }
-        .admin-table .delete-btn {
-            background: var(--danger);
-            color: #fff;
-            border: none;
-        }
-        .admin-table .delete-btn:hover {
-            background: #c62828;
-        }
-        .detail-row td {
-            background: var(--glass) !important;
-            padding: 14px !important;
-            line-height: 1.8;
-            font-size: var(--font-xs);
-        }
-        .logout-btn {
-            background: var(--danger);
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: var(--font-xs);
-            transition: all var(--transition);
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .logout-btn:hover {
-            background: #c62828;
-        }
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-        .stat-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-        }
-        .stat-card .stat-num {
-            font-size: var(--font-2xl);
-            font-weight: 900;
-            color: var(--accent);
-        }
-        .stat-card .stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-top: 2px;
-        }
-        .admin-search-bar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .admin-search-bar input {
-            flex: 1;
-            min-width: 200px;
-        }
-        .admin-actions-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .footer {
-            margin-top: 32px;
-            padding-top: 20px;
-            border-top: 2px solid var(--border);
-            text-align: center;
-            transition: border-color var(--transition);
-        }
-        .footer-brand {
-            font-family: 'Montserrat Alternates', sans-serif;
-            font-weight: 800;
-            font-size: 16px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                padding-bottom: max(50px, env(safe-area-inset-bottom, 16px));
-            }
-            .container {
-                padding: 22px 14px;
-                border-radius: 16px;
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .direction-card {
-                padding: 22px 16px;
-                gap: 8px;
-            }
-            .direction-card .card-icon {
-                font-size: 36px;
-            }
-            .direction-card .card-title {
-                font-size: var(--font-base);
-            }
-            .main-title {
-                font-size: 22px;
-            }
-            .section {
-                padding: 16px 12px;
-                border-radius: 14px;
-            }
-            .section-title {
-                font-size: var(--font-base);
-            }
-            .btn {
-                font-size: 11px;
-                padding: 7px 14px;
-            }
-            .header {
-                gap: 10px;
-            }
-            .brand-logo {
-                font-size: 18px;
-            }
-            .brand-logo i {
-                font-size: 20px;
-            }
-            .admin-tabs {
-                gap: 4px;
-            }
-            .admin-tab {
-                font-size: 11px;
-                padding: 7px 12px;
-            }
-            .toggle-row {
-                padding: 6px 10px;
-                gap: 8px;
-            }
-            .toggle-label {
-                min-width: 80px;
-                font-size: 11px;
-            }
-            .stats-bar {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .stat-card {
-                padding: 10px;
-            }
-            .stat-card .stat-num {
-                font-size: 20px;
-            }
-            .admin-table th,
-            .admin-table td {
-                padding: 6px 4px;
-                font-size: 10px;
-            }
-            .admin-table .expand-btn,
-            .admin-table .delete-btn {
-                padding: 4px 8px;
-                font-size: 10px;
-            }
-            .submit-btn {
-                font-size: var(--font-sm);
-                padding: 14px 20px;
-            }
-            .success-icon {
-                font-size: 56px;
-            }
-            .success-title {
-                font-size: 20px;
-            }
-            .scroll-top {
-                width: 38px;
-                height: 38px;
-                bottom: 20px;
-                right: 14px;
-            }
-        }
-        @media (max-width: 400px) {
-            .container {
-                padding: 16px 10px;
-                border-radius: 14px;
-            }
-            .cards-grid {
-                gap: 10px;
-            }
-            .direction-card {
-                padding: 18px 12px;
-            }
-            .direction-card .card-icon {
-                font-size: 30px;
-            }
-            .direction-card .card-title {
-                font-size: var(--font-sm);
-            }
-            .direction-card .card-desc {
-                font-size: 11px;
-            }
-            .header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .brand-logo {
-                justify-content: center;
-            }
-            .header-actions {
-                justify-content: center;
-            }
-            .admin-tabs {
-                justify-content: center;
-            }
-            .toggle-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .stats-bar {
-                grid-template-columns: 1fr 1fr;
-            }
+            --danger-light: #2a0000;
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow-hover: 0 12px 40px rgba(0,0,0,0.6);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            background:var(--bg);color:var(--text);min-height:100vh;
+            padding:20px;display:flex;justify-content:center;align-items:flex-start;
+            transition:background 0.3s,color 0.3s;
+            background-image:radial-gradient(ellipse at 20% 20%,rgba(67,160,71,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(21,101,192,0.03) 0%,transparent 50%);
+            background-attachment:fixed;
+            user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;
+            font-size:var(--font-base);line-height:1.6;
+        }
+        body.dark{background-image:radial-gradient(ellipse at 20% 20%,rgba(102,187,106,0.03) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(66,165,245,0.02) 0%,transparent 50%)}
+        input,textarea{user-select:text;-webkit-user-select:text;font-size:15px!important}
+        .container{
+            max-width:860px;width:100%;padding:32px 28px;
+            background:var(--card);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+            border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);
+            transition:all var(--transition);
+        }
+        .container.wide{max-width:1200px}
+        .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+        .brand-logo{
+            font-weight:900;font-size:var(--font-xl);
+            background:linear-gradient(135deg,var(--accent),var(--accent-light));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            display:flex;align-items:center;gap:10px;letter-spacing:-0.3px;
+        }
+        .brand-logo i{-webkit-text-fill-color:var(--accent);font-size:26px}
+        .header-actions{display:flex;gap:8px;flex-wrap:wrap}
+        .btn{
+            padding:10px 22px;border:none;border-radius:50px;
+            font-size:13px;font-weight:700;cursor:pointer;
+            display:inline-flex;align-items:center;gap:7px;color:#fff;
+            -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+            transition:all var(--transition);box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+        .btn:active{transform:scale(0.96)}
+        .btn-theme{background:linear-gradient(135deg,var(--accent),var(--accent-light));box-shadow:0 4px 16px var(--accent-glow)}
+        .btn-admin{background:linear-gradient(135deg,var(--accent2),var(--accent2-light));box-shadow:0 4px 16px var(--accent2-glow)}
+        .btn-back{background:var(--glass);color:var(--text)!important;border:1px solid var(--border);box-shadow:none}
+        .btn-back:hover{background:var(--border)}
+        .btn-danger{background:var(--danger)}
+        .main-title{
+            text-align:center;font-size:var(--font-3xl);font-weight:900;
+            padding-bottom:16px;margin-bottom:16px;border-bottom:2px solid var(--border);
+            position:relative;letter-spacing:-0.5px;
+        }
+        .main-title::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:70px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:3px}
+        .gradient-text{
+            font-weight:900;
+            background:linear-gradient(135deg,var(--accent),var(--accent-light),var(--accent-dark),var(--accent-light));
+            background-size:300% 300%;
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            animation:gradientMove 6s ease infinite;
+        }
+        @keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        .sub-header{text-align:center;font-size:var(--font-sm);margin-bottom:20px;color:var(--text-secondary)}
+        .sub-header a{color:var(--accent);font-weight:700;text-decoration:none;transition:color var(--transition)}
+        .sub-header a:hover{color:var(--accent-light)}
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:18px}
+        .direction-card{
+            background:var(--glass);border:2px solid var(--border);border-radius:var(--radius);
+            padding:32px 24px;text-align:center;cursor:pointer;transition:all var(--transition);
+            box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;
+        }
+        .direction-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+        .direction-card:active{transform:scale(0.97)}
+        .direction-card.personnel{border-left:5px solid var(--accent)}
+        .direction-card.personnel:hover{border-color:var(--accent);box-shadow:0 12px 40px var(--accent-glow)}
+        .direction-card.support{border-left:5px solid var(--accent2)}
+        .direction-card.support:hover{border-color:var(--accent2);box-shadow:0 12px 40px var(--accent2-glow)}
+        .direction-card.media{border-left:5px solid var(--accent3)}
+        .direction-card.media:hover{border-color:var(--accent3);box-shadow:0 12px 40px var(--accent3-glow)}
+        .direction-card .card-icon{font-size:48px;transition:transform var(--transition)}
+        .direction-card:hover .card-icon{transform:scale(1.1)}
+        .direction-card.personnel .card-icon{color:var(--accent)}
+        .direction-card.support .card-icon{color:var(--accent2)}
+        .direction-card.media .card-icon{color:var(--accent3)}
+        .direction-card .card-title{font-weight:800;font-size:var(--font-lg);color:var(--heading)}
+        .direction-card .card-desc{font-size:var(--font-sm);color:var(--text-secondary);max-width:250px}
+        .direction-card .card-badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:0.3px}
+        .direction-card.personnel .card-badge{background:#e8f5e9;color:#2e7d32}
+        .direction-card.support .card-badge{background:#e3f2fd;color:#0d47a1}
+        .direction-card.media .card-badge{background:#fff3e0;color:#bf360c}
+        body.dark .direction-card.personnel .card-badge{background:#0f1a0f;color:#81c784}
+        body.dark .direction-card.support .card-badge{background:#001a2a;color:#64b5f6}
+        body.dark .direction-card.media .card-badge{background:#2a1000;color:#ffab40}
+        .closed-overlay{
+            position:absolute;inset:0;background:rgba(0,0,0,0.6);
+            backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+            display:flex;align-items:center;justify-content:center;
+            font-weight:800;font-size:var(--font-lg);color:#fff;pointer-events:none;
+            letter-spacing:0.5px;text-shadow:0 2px 8px rgba(0,0,0,0.5);
+        }
+        .section{
+            background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);
+            padding:24px 20px;margin-bottom:18px;box-shadow:var(--shadow);
+            border-left:5px solid var(--accent);transition:all var(--transition);
+        }
+        .section:hover{box-shadow:var(--shadow-hover)}
+        .section.support-section{border-left-color:var(--accent2)}
+        .section.media-section{border-left-color:var(--accent3)}
+        .section-title{font-weight:800;font-size:var(--font-lg);color:var(--heading);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+        .section-title i{font-size:20px}
+        .icon.green{color:var(--accent)}.icon.blue{color:var(--accent2)}.icon.orange{color:var(--accent3)}
+        .form-group{margin-bottom:18px}
+        label{display:block;font-weight:600;font-size:var(--font-sm);margin-bottom:6px;color:var(--heading)}
+        label .required{color:var(--danger);font-weight:700}
+        label .hint{display:block;font-weight:400;font-size:12px;color:var(--text-secondary);margin-top:3px}
+        input[type="text"],input[type="number"],input[type="password"],textarea{
+            width:100%;padding:13px 16px;border:2px solid var(--input-border);
+            border-radius:var(--radius-sm);font-size:15px;font-family:inherit;
+            background:var(--input-bg);color:var(--text);outline:none;resize:vertical;-webkit-appearance:none;
+            transition:border-color var(--transition),box-shadow var(--transition);
+        }
+        input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(67,160,71,0.08)}
+        textarea{min-height:110px;line-height:1.7}
+        .radio-group{display:flex;flex-direction:column;gap:8px}
+        .radio-option{
+            display:flex;align-items:center;gap:12px;padding:13px 18px;
+            background:var(--input-bg);border:2px solid var(--input-border);
+            border-radius:var(--radius-sm);cursor:pointer;font-size:var(--font-sm);
+            transition:all var(--transition);
+        }
+        .radio-option:hover{border-color:var(--accent-light);transform:translateX(3px)}
+        .radio-option.selected{border-color:var(--accent);background:rgba(67,160,71,0.06);box-shadow:0 0 0 4px rgba(67,160,71,0.06);transform:translateX(5px)}
+        .radio-option input[type="radio"]{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0}
+        .other-input{margin-top:8px}
+        .submit-btn{
+            width:100%;padding:18px 28px;border:none;border-radius:var(--radius-sm);
+            font-size:var(--font-base);font-weight:800;cursor:pointer;color:#fff;
+            background:linear-gradient(135deg,var(--accent),var(--accent-light));
+            box-shadow:0 6px 24px var(--accent-glow);
+            -webkit-tap-highlight-color:transparent;margin-top:10px;
+            transition:all var(--transition);letter-spacing:0.3px;
+        }
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px var(--accent-glow)}
+        .submit-btn:active{transform:scale(0.97)}
+        .submit-btn.support-btn{background:linear-gradient(135deg,var(--accent2),var(--accent2-light));box-shadow:0 6px 24px var(--accent2-glow)}
+        .submit-btn.support-btn:hover{box-shadow:0 10px 32px var(--accent2-glow)}
+        .submit-btn.media-btn{background:linear-gradient(135deg,var(--accent3),var(--accent3-light));box-shadow:0 6px 24px var(--accent3-glow)}
+        .submit-btn.media-btn:hover{box-shadow:0 10px 32px var(--accent3-glow)}
+        .fly-overlay{
+            position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;
+            background:var(--bg);opacity:0;pointer-events:none;transition:opacity 0.3s;
+        }
+        .fly-overlay.active{opacity:1}
+        .fly-envelope{font-size:90px;animation:flyAway 1.2s ease-in forwards}
+        .fly-envelope.green{color:var(--accent)}.fly-envelope.blue{color:var(--accent2)}.fly-envelope.orange{color:var(--accent3)}
+        @keyframes flyAway{
+            0%{transform:scale(0) rotate(-30deg);opacity:0}
+            30%{transform:scale(1.2) rotate(5deg);opacity:1}
+            60%{transform:scale(1) translateY(-20px);opacity:1}
+            100%{transform:scale(0.3) translateY(-300px) translateX(100px) rotate(20deg);opacity:0}
+        }
+        .success-overlay{
+            position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+            background:var(--bg);opacity:0;pointer-events:none;transition:opacity 0.5s;
+        }
+        .success-overlay.active{opacity:1;pointer-events:all}
+        .success-content{text-align:center;padding:40px;animation:popIn 0.6s ease}
+        @keyframes popIn{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+        .success-icon{font-size:84px;margin-bottom:16px}
+        .success-title{font-size:var(--font-2xl);font-weight:900;color:var(--heading);margin-bottom:14px}
+        .success-text{font-size:var(--font-base);color:var(--text-secondary);margin-bottom:24px;line-height:1.7}
+        .success-text a{color:var(--accent);font-weight:700;text-decoration:none;transition:color var(--transition)}
+        .success-text a:hover{color:var(--accent-light)}
+        .success-btn{
+            padding:14px 32px;border:none;border-radius:50px;font-size:var(--font-sm);
+            font-weight:700;cursor:pointer;color:#fff;
+            background:linear-gradient(135deg,var(--accent),var(--accent-light));
+            box-shadow:0 4px 16px var(--accent-glow);transition:all var(--transition);
+        }
+        .success-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--accent-glow)}
+        .toast{
+            position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+            background:var(--heading);color:var(--bg);padding:14px 28px;
+            border-radius:50px;font-weight:600;font-size:var(--font-sm);z-index:9998;
+            opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;
+            box-shadow:0 8px 32px rgba(0,0,0,0.25);
+        }
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+        body.dark .toast{background:#e0e8f0;color:#1a1a2e}
+
+        /* АДМИН-ПАНЕЛЬ — УЛУЧШЕННЫЙ ДИЗАЙН */
+        .admin-card{
+            background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);
+            padding:24px;margin-bottom:18px;box-shadow:var(--shadow);
+        }
+        .admin-stats{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:20px;
+        }
+        .admin-stat{
+            background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);
+            padding:20px;text-align:center;transition:all var(--transition);box-shadow:var(--shadow);
+        }
+        .admin-stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+        .admin-stat .stat-value{font-size:36px;font-weight:900;color:var(--accent);line-height:1}
+        .admin-stat .stat-label{font-size:12px;color:var(--text-secondary);font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:0.5px}
+        .admin-tabs{
+            display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;
+            background:var(--glass);padding:6px;border-radius:50px;border:1px solid var(--border);
+        }
+        .admin-tab{
+            padding:10px 22px;border:none;border-radius:50px;
+            font-weight:700;font-size:13px;cursor:pointer;transition:all var(--transition);
+            background:transparent;color:var(--text-secondary);
+        }
+        .admin-tab.active{background:var(--accent);color:#fff;box-shadow:0 4px 16px var(--accent-glow)}
+        .admin-tab:hover:not(.active){color:var(--heading);background:rgba(67,160,71,0.05)}
+        .admin-search{
+            display:flex;gap:10px;margin-bottom:16px;align-items:center;
+        }
+        .admin-search input{
+            flex:1;padding:12px 18px;border:2px solid var(--input-border);
+            border-radius:50px;font-size:14px;background:var(--input-bg);color:var(--text);
+            outline:none;transition:all var(--transition);
+        }
+        .admin-search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(67,160,71,0.06)}
+        .admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+        .table-wrapper{
+            overflow-x:auto;max-height:55vh;border-radius:var(--radius-sm);
+            border:1px solid var(--border);box-shadow:var(--shadow);
+        }
+        .table-wrapper::-webkit-scrollbar{width:6px;height:6px}
+        .table-wrapper::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+        .table-wrapper::-webkit-scrollbar-track{background:transparent}
+        .admin-table{width:100%;border-collapse:collapse;font-size:13px}
+        .admin-table thead{position:sticky;top:0;z-index:2}
+        .admin-table th{
+            padding:14px 12px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+            color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;
+            letter-spacing:0.8px;text-align:left;white-space:nowrap;
+        }
+        .admin-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);transition:background var(--transition)}
+        .admin-table tbody tr:hover td{background:rgba(67,160,71,0.03)}
+        .admin-table .nick-cell{font-weight:700;color:var(--accent)}
+        .admin-table .action-btns{display:flex;gap:6px}
+        .admin-table .icon-btn{
+            width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+            background:var(--glass);cursor:pointer;display:flex;align-items:center;justify-content:center;
+            font-size:14px;transition:all var(--transition);color:var(--text);
+        }
+        .admin-table .icon-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+        .admin-table .icon-btn.delete-btn:hover{background:var(--danger);border-color:var(--danger);color:#fff}
+        .detail-row td{background:var(--glass)!important;padding:18px!important;line-height:1.9;font-size:13px;animation:fadeIn 0.3s ease}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .detail-row strong{color:var(--accent)}
+        .toggle-row{
+            display:flex;align-items:center;gap:12px;margin-bottom:10px;
+            padding:10px 16px;background:var(--glass);border-radius:var(--radius-sm);
+            border:1px solid var(--border);
+        }
+        .toggle-label{font-weight:700;font-size:13px;color:var(--heading);min-width:100px}
+        .toggle-switch{position:relative;width:50px;height:28px;flex-shrink:0}
+        .toggle-switch input{opacity:0;width:0;height:0}
+        .toggle-slider{position:absolute;inset:0;background:#ccc;border-radius:28px;cursor:pointer;transition:0.3s}
+        .toggle-slider::before{content:'';position:absolute;height:22px;width:22px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.3s}
+        input:checked+.toggle-slider{background:var(--accent)}
+        input:checked+.toggle-slider::before{transform:translateX(22px)}
+        .footer{margin-top:36px;padding-top:22px;border-top:2px solid var(--border);text-align:center}
+        .footer-brand{
+            font-weight:800;font-size:17px;
+            background:linear-gradient(135deg,var(--accent),var(--accent-light));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;
+        }
+        @media(max-width:768px){
+            body{padding:10px}
+            .container{padding:20px 14px;border-radius:16px}
+            .cards-grid{grid-template-columns:1fr}
+            .main-title{font-size:var(--font-2xl)}
+            .section{padding:18px 14px}
+            .section-title{font-size:var(--font-base)}
+            .btn{font-size:12px;padding:8px 16px}
+            .admin-stats{grid-template-columns:repeat(2,1fr)}
+            .admin-stat .stat-value{font-size:28px}
+            .admin-table th,.admin-table td{padding:8px 6px;font-size:11px}
+            .admin-table .icon-btn{width:30px;height:30px;font-size:12px}
+            .admin-tabs{gap:4px}
+            .admin-tab{padding:8px 14px;font-size:12px}
         }
     </style>
 </head>
 <body>
+    <div class="fly-overlay" id="flyOverlay"><div class="fly-envelope" id="flyEnvelope">✉️</div></div>
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-content">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Заявка отправлена!</div>
+            <div class="success-text">Ожидайте итогов здесь:<br><a href="https://t.me/ironpepro" target="_blank">@ironpepro</a></div>
+            <button class="success-btn" id="closeSuccessBtn">Понятно</button>
+        </div>
+    </div>
     <div class="toast" id="toast"></div>
-    <button class="scroll-top" id="scrollTop" aria-label="Наверх"><i class="fas fa-chevron-up"></i></button>
     <div class="container" id="appContainer">
         <header class="header">
             <div class="brand-logo"><i class="fas fa-crown"></i> IronMine</div>
-            <div class="header-actions" id="headerActions">
-                <button class="btn btn-theme" id="themeToggle"><i class="fas fa-moon"></i> Тема</button>
-                <button class="btn btn-admin" id="adminBtn"><i class="fas fa-lock"></i> Админ</button>
-            </div>
+            <div class="header-actions" id="headerActions"></div>
         </header>
         <div id="dynamicContent"></div>
         <footer class="footer"><span class="footer-brand">IronMine 2020-2027</span></footer>
     </div>
 
     <script>
-        const STORAGE_KEYS = {
-            personnel: 'im_apps_personnel',
-            support: 'im_apps_support',
-            media: 'im_apps_media'
-        };
+        const STORAGE_KEYS = { personnel: 'im_apps_p', support: 'im_apps_s', media: 'im_apps_m' };
         const ADMIN_PASS = 'ironminemanager2026custom';
-        const TOGGLE_CACHE_KEY = 'im_toggles_cache';
         let recruitmentToggles = RECRUITMENT_SETTINGS;
-        let usedNicknames = {
-            personnel: [],
-            support: [],
-            media: []
-        };
+        let usedNicknames = { personnel: [], support: [], media: [] };
         let currentDirection = null;
         let isAdmin = false;
         let adminTab = 'personnel';
         let currentSearchFilter = '';
-        const labels = {
-            personnel: 'Персонал',
-            support: 'Поддержка',
-            media: 'Медиа'
-        };
-        const icons = {
-            personnel: '🛡️',
-            support: '🎧',
-            media: '🎬'
-        };
+        const labels = { personnel: 'Персонал', support: 'Поддержка', media: 'Медиа' };
+        const icons = { personnel: '🛡️', support: '🎧', media: '🎬' };
+        const envColors = { personnel: 'green', support: 'blue', media: 'orange' };
 
-        function getToggles() {
-            return recruitmentToggles;
-        }
-
-        function getApps(dir) {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEYS[dir]) || '[]');
-            } catch (e) {
-                return [];
-            }
-        }
-
-        function saveApp(dir, data) {
-            const apps = getApps(dir);
-            apps.push(data);
-            localStorage.setItem(STORAGE_KEYS[dir], JSON.stringify(apps));
-        }
-
-        function clearAllApps(dir) {
-            localStorage.setItem(STORAGE_KEYS[dir], '[]');
-            loadUsedNicknames();
-        }
-
-        function loadUsedNicknames() {
-            ['personnel', 'support', 'media'].forEach(d => {
-                usedNicknames[d] = getApps(d).map(a => (a.nickname || '').toLowerCase().trim()).filter(
-                Boolean);
-            });
-        }
-
-        function countSentences(text) {
-            if (!text || !text.trim()) return 0;
-            const c = text.replace(/\.{2,}/g, '.').replace(/[!?]+/g, '.').replace(/\.+/g, '|');
-            return c.split('|').filter(s => s.trim().length > 0).length;
-        }
-
-        function escapeHtml(t) {
-            const d = document.createElement('div');
-            d.textContent = t || '';
-            return d.innerHTML;
-        }
-
+        function getToggles() { return recruitmentToggles; }
+        function getApps(dir) { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS[dir]) || '[]'); } catch(e) { return []; } }
+        function saveApp(dir, data) { const a = getApps(dir); a.push(data); localStorage.setItem(STORAGE_KEYS[dir], JSON.stringify(a)); }
+        function clearAllApps(dir) { localStorage.setItem(STORAGE_KEYS[dir], '[]'); loadUsedNicknames(); }
+        function loadUsedNicknames() { ['personnel','support','media'].forEach(d => { usedNicknames[d] = getApps(d).map(a => (a.nickname || '').toLowerCase().trim()).filter(Boolean); }); }
+        function countSentences(text) { if(!text || !text.trim()) return 0; return text.split(/[.!?]+/).filter(s => s.trim().length > 0).length; }
+        function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
         let toastTimeout;
+        function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.classList.remove('show'), 2500); }
 
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => t.classList.remove('show'), 2800);
+        function playSuccessAnimation(dir) {
+            const flyOverlay = document.getElementById('flyOverlay');
+            const flyEnvelope = document.getElementById('flyEnvelope');
+            const successOverlay = document.getElementById('successOverlay');
+            flyEnvelope.className = 'fly-envelope ' + (envColors[dir] || 'green');
+            flyOverlay.classList.add('active');
+            setTimeout(() => { flyOverlay.classList.remove('active'); successOverlay.classList.add('active'); }, 1200);
         }
 
         function init() {
             recruitmentToggles = RECRUITMENT_SETTINGS;
             loadUsedNicknames();
-            initTheme();
-            initScroll();
+            try { if(localStorage.getItem('im-theme') === 'dark') { document.body.classList.add('dark'); } } catch(e) {}
             initCopyProtection();
             renderHome();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-            document.getElementById('adminBtn').addEventListener('click', showAdminLogin);
-        }
-
-        function initTheme() {
-            try {
-                if (localStorage.getItem('im-theme') === 'dark') {
-                    document.body.classList.add('dark');
-                    document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i> Тема';
-                }
-            } catch (e) {}
-        }
-
-        function toggleTheme() {
-            const b = document.body.classList.toggle('dark');
-            document.getElementById('themeToggle').innerHTML = b ? '<i class="fas fa-sun"></i> Тема' :
-                '<i class="fas fa-moon"></i> Тема';
-            try {
-                localStorage.setItem('im-theme', b ? 'dark' : 'light');
-            } catch (e) {}
-        }
-
-        function initScroll() {
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        document.getElementById('scrollTop').classList.toggle('visible', window.scrollY >
-                            400);
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
-            document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            document.getElementById('closeSuccessBtn').addEventListener('click', () => { document.getElementById('successOverlay').classList.remove('active'); renderHome(); });
         }
 
         function initCopyProtection() {
-            document.addEventListener('copy', e => {
-                if (!['input', 'textarea'].includes(document.activeElement?.tagName.toLowerCase())) {
-                    e.preventDefault();
-                    showToast('🚫 Копирование запрещено');
-                }
-            });
-            document.addEventListener('cut', e => {
-                if (!['input', 'textarea'].includes(document.activeElement?.tagName.toLowerCase())) {
-                    e.preventDefault();
-                }
-            });
-            document.addEventListener('contextmenu', e => {
-                if (!['input', 'textarea'].includes(e.target.tagName.toLowerCase())) e.preventDefault();
-            });
-            document.addEventListener('keydown', e => {
-                if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a', 'u', 'p', 's'].includes(e.key.toLowerCase()) &&
-                    !['input', 'textarea'].includes(document.activeElement?.tagName.toLowerCase())) {
-                    e.preventDefault();
-                }
-            });
+            document.addEventListener('copy', e => { if(!['input','textarea'].includes(document.activeElement?.tagName.toLowerCase())) { e.preventDefault(); } });
+            document.addEventListener('contextmenu', e => { if(!['input','textarea'].includes(e.target.tagName.toLowerCase())) e.preventDefault(); });
         }
 
         function renderHome() {
-            currentDirection = null;
-            isAdmin = false;
+            currentDirection = null; isAdmin = false;
             const toggles = getToggles();
             const cards = [
-                { id: 'personnel', icon: '🛡️', title: 'Персонал',
-                    desc: 'Станьте хелпером, модератором или администратором сервера.', color: 'personnel' },
-                { id: 'support', icon: '🎧', title: 'Поддержка',
-                    desc: 'Помогайте игрокам решать технические вопросы и проблемы.', color: 'support' },
-                { id: 'media', icon: '🎬', title: 'Медиа',
-                    desc: 'Создавайте контент на YouTube, VK Видео, TikTok.', color: 'media' }
+                { id: 'personnel', icon: '🛡️', title: 'Персонал', desc: 'Станьте хелпером, модератором или администратором сервера.', color: 'personnel' },
+                { id: 'support', icon: '🎧', title: 'Поддержка', desc: 'Помогайте игрокам решать технические вопросы и проблемы.', color: 'support' },
+                { id: 'media', icon: '🎬', title: 'Медиа', desc: 'Создавайте контент на YouTube, VK Видео, TikTok.', color: 'media' }
             ];
-            document.getElementById('dynamicContent').innerHTML = `
-            <h1 class="main-title"><span class="gradient-text">📝 Набор в команду</span></h1>
-            <div class="sub-header">Выберите направление для подачи заявки</div>
-            <div class="cards-grid">${cards.map(c => `
-              <div class="direction-card ${c.color}" data-dir="${c.id}" style="${!toggles[c.id]?'opacity:0.85;':''}">
-                ${!toggles[c.id] ? '<div class="closed-overlay">🔒 Набор закрыт</div>' : ''}
-                <span class="card-icon">${c.icon}</span>
-                <div class="card-title">${c.title}</div>
-                <div class="card-desc">${c.desc}</div>
-                <span class="card-badge">${toggles[c.id] ? '✅ Открыт' : '🔒 Закрыт'}</span>
-              </div>`).join('')}</div>`;
+            let html = '<h1 class="main-title"><span class="gradient-text">📝 Набор в команду</span></h1><div class="sub-header">Выберите направление для подачи заявки</div><div class="cards-grid">';
+            cards.forEach(c => {
+                html += `<div class="direction-card ${c.color}" data-dir="${c.id}">${!toggles[c.id] ? '<div class="closed-overlay">🔒 Набор закрыт</div>' : ''}<span class="card-icon">${c.icon}</span><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div><span class="card-badge">${toggles[c.id] ? '✅ Открыт' : '🔒 Закрыт'}</span></div>`;
+            });
+            html += '</div>';
+            document.getElementById('dynamicContent').innerHTML = html;
             document.querySelectorAll('.direction-card').forEach(card => card.addEventListener('click', function() {
                 const dir = this.dataset.dir;
-                if (!getToggles()[dir]) {
-                    showToast('🔒 Набор в этом направлении временно закрыт');
-                    return;
-                }
+                if (!getToggles()[dir]) { showToast('🔒 Набор закрыт'); return; }
                 if (dir === 'personnel') renderPersonnelForm();
                 if (dir === 'support') renderSupportForm();
                 if (dir === 'media') renderMediaForm();
             }));
-            document.getElementById('headerActions').innerHTML = `
-            <button class="btn btn-theme" id="themeToggle"><i class="fas fa-moon"></i> Тема</button>
-            <button class="btn btn-admin" id="adminBtn"><i class="fas fa-lock"></i> Админ</button>`;
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-            document.getElementById('adminBtn').addEventListener('click', showAdminLogin);
+            document.getElementById('headerActions').innerHTML = '<button class="btn btn-theme" onclick="toggleTheme()"><i class="fas fa-moon"></i> Тема</button><button class="btn btn-admin" onclick="showAdminLogin()"><i class="fas fa-lock"></i> Админ</button>';
             document.getElementById('appContainer').classList.remove('wide');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ============================================================
-        //  АНКЕТА ПЕРСОНАЛА
-        // ============================================================
+        function toggleTheme() { const b = document.body.classList.toggle('dark'); try { localStorage.setItem('im-theme', b ? 'dark' : 'light'); } catch(e) {} renderHome(); }
+
         function renderPersonnelForm() {
             currentDirection = 'personnel';
             const variant = Math.floor(Math.random() * 3) + 1;
-            const variants = {
+            const vars = {
                 1: [
-                    { q: 'Составляющим какого пункта правил является "Тим с читером"?', o: ['2.2', '3.1', '2.1',
-                            '1.14'
-                        ] },
-                    { q: 'Каким пунктом правил является "Создание регионов с нецензурной лексикой"?',
-                        options: ['3.1', '3.6', '4.4', '4.13'] },
-                    { q: 'Какое наказание соответствует пункту 2.3?', o: ['Снятие привилегии',
-                            'Блокировка на 43800 минут', 'Блокировка на 43800 минут + снятие привилегии',
-                            'Блокировка навсегда + снятие привилегии'
-                        ] },
-                    { q: 'Какое наказание соответствует пункту 3.7?', o: ['Блокировка на 4320 минут',
-                            'Предупреждение; блокировка на 4320 минут',
-                            'Блокировка без возможности разблокировки', 'Блокировка на 10080 минут'
-                        ] },
-                    { q: 'Игрок с никнеймом "mopsikzloSsr" распространил ложную информацию о вайпе. Какое нарушение?',
-                        o: ['1.12 + 3.6', '3.5', '1.12 + 3.4', '1.12'] }
+                    { q: 'Составляющим какого пункта правил является "Тим с читером"?', o: ['2.2','3.1','2.1','1.14'] },
+                    { q: 'Каким пунктом правил является "Создание регионов с нецензурной лексикой"?', o: ['3.1','3.6','4.4','4.13'] },
+                    { q: 'Какое наказание соответствует пункту 2.3?', o: ['Снятие привилегии','Блокировка на 43800 минут','Блокировка на 43800 минут + снятие привилегии','Блокировка навсегда + снятие привилегии'] },
+                    { q: 'Какое наказание соответствует пункту 3.7?', o: ['Блокировка на 4320 минут','Предупреждение; блокировка на 4320 минут','Блокировка без возможности разблокировки','Блокировка на 10080 минут'] },
+                    { q: 'Игрок с никнеймом "mopsikzloSsr" распространил ложную информацию о вайпе. Какое нарушение?', o: ['1.12 + 3.6','3.5','1.12 + 3.4','1.12'] }
                 ],
                 2: [
-                    { q: 'Какому пункту правил соответствует "распространение недоработок сервера"?', o: [
-                            '1.13', '3.3', '4.8', '1.11'
-                        ] },
-                    { q: 'Какому пункту правил соответствует "создание префиксов, содержащих в себе провокационный характер"?',
-                        o: ['4.7', '4.1', '3.8', '3.6'] },
-                    { q: 'Какое наказание соответствует пункту 1.1?', o: [
-                            'Блокировка чата на 30 минут; Блокировка чата на 60 минут', 'Предупреждение',
-                            'Предупреждение; Блокировка чата на 30 минут; Блокировка чата на 60 минут',
-                            'Блокировка чата на 180 минут'
-                        ] },
-                    { q: 'Какое наказание соответствует пункту 1.8?', o: ['Блокировка чата на 60 минут',
-                            'Блокировка чата на 30 минут; Блокировка чата на 60 минут',
-                            'Блокировка чата на 4320 минут', 'Блокировка чата на 180 минут'
-                        ] },
-                    { q: 'Старший Хелпер вызвал подозреваемого игрока на проверку на читы. Однако, вызванный игрок вышел с сервера. Какое нарушение?',
-                        o: ['2.1: 43800 минут', '2.5: 43800 минут', '2.2: 30240 минут',
-                        '2.5: 10080 минут'] }
+                    { q: 'Какому пункту правил соответствует "распространение недоработок сервера"?', o: ['1.13','3.3','4.8','1.11'] },
+                    { q: 'Какому пункту правил соответствует "создание префиксов, содержащих в себе провокационный характер"?', o: ['4.7','4.1','3.8','3.6'] },
+                    { q: 'Какое наказание соответствует пункту 1.1?', o: ['Блокировка чата на 30 минут; Блокировка чата на 60 минут','Предупреждение','Предупреждение; Блокировка чата на 30 минут; Блокировка чата на 60 минут','Блокировка чата на 180 минут'] },
+                    { q: 'Какое наказание соответствует пункту 1.8?', o: ['Блокировка чата на 60 минут','Блокировка чата на 30 минут; Блокировка чата на 60 минут','Блокировка чата на 4320 минут','Блокировка чата на 180 минут'] },
+                    { q: 'Старший Хелпер вызвал подозреваемого игрока на проверку на читы. Однако, вызванный игрок вышел с сервера.', o: ['2.1: 43800','2.5: 43800','2.2: 30240','2.5: 10080'] }
                 ],
                 3: [
-                    { q: 'Какому пункту правил соответствует "обход блокировки чата путём использования /console"?',
-                        o: ['5.2', '1.15', '1.9', '5.1'] },
-                    { q: 'Какому пункту правил соответствует "оффтоп в /report"?', o: ['1.7', '2.4', '3.5',
-                            '4.1'
-                        ] },
-                    { q: 'Какое наказание соответствует пункту 1.14?', o: [
-                            'Блокировка чата на 10080 минут',
-                            'Блокировка аккаунта без возможности разблокировки + снятие привилегии',
-                            'Блокировка аккаунта на 43800 минут', 'Блокировка аккаунта на 10080 минут'
-                        ] },
-                    { q: 'Какое наказание соответствует пункту 4.2?', o: [
-                            'Блокировка аккаунта на 20160 минут',
-                            'Предупреждение; блокировка аккаунта на 10080 минут',
-                            'Предупреждение; блокировка аккаунта на 1440 минут',
-                            'Блокировка аккаунта на 10080 минут'
-                        ] },
-                    { q: 'Два игрока решили пойти на другой сервер, и один из них хочет дать данные по этому серверу. Какое нарушение?',
-                        o: ['1.11: 10080 минут', '1.12: 10080 минут', '1.11: блокировка навсегда',
-                            '1.13: 60 минут'
-                        ] }
+                    { q: 'Какому пункту правил соответствует "обход блокировки чата путём использования /console"?', o: ['5.2','1.15','1.9','5.1'] },
+                    { q: 'Какому пункту правил соответствует "оффтоп в /report"?', o: ['1.7','2.4','3.5','4.1'] },
+                    { q: 'Какое наказание соответствует пункту 1.14?', o: ['Блокировка чата на 10080 минут','Блокировка аккаунта без возможности разблокировки + снятие привилегии','Блокировка аккаунта на 43800 минут','Блокировка аккаунта на 10080 минут'] },
+                    { q: 'Какое наказание соответствует пункту 4.2?', o: ['Блокировка аккаунта на 20160 минут','Предупреждение; блокировка аккаунта на 10080 минут','Предупреждение; блокировка аккаунта на 1440 минут','Блокировка аккаунта на 10080 минут'] },
+                    { q: 'Два игрока решили пойти на другой сервер, и один из них хочет дать данные по этому серверу.', o: ['1.11: 10080','1.12: 10080','1.11: навсегда','1.13: 60'] }
                 ]
             };
-            const q = variants[variant];
+            const q = vars[variant];
             document.getElementById('dynamicContent').innerHTML = `
-            <button class="btn btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Назад</button>
+            <button class="btn btn-back" id="btnBackPersonnel"><i class="fas fa-arrow-left"></i> Назад</button>
             <h1 class="main-title"><span class="gradient-text">🛡️ Набор в персонал</span></h1>
-            <div class="sub-header">Итоги: <a href="https://t.me/ironpepro" target="_blank" rel="noopener">@ironpepro</a></div>
-            <div class="info-banner personnel-banner"><i class="fas fa-info-circle"></i><div><strong>Важно:</strong> вопросы с <strong>*</strong> требуют не менее 5 предложений.</div></div>
+            <div class="sub-header">Итоги: <a href="https://t.me/ironpepro" target="_blank">@ironpepro</a></div>
+            <div class="section"><h2 class="section-title"><i class="fas fa-info-circle icon green"></i> Важно</h2><p style="font-size:var(--font-sm);color:var(--text-secondary);">Вопросы с <strong style="color:var(--accent);">*</strong> требуют не менее 5 предложений.</p></div>
             <div class="section"><h2 class="section-title"><i class="fas fa-user icon green"></i> Основные данные</h2>
-              ${['Имя','Возраст (от 13)','Никнейм','Наигранное время','Город'].map((l,i)=>`<div class="form-group"><label>${i+1}. ${l} <span class="required">*</span>${i===1?'<span class="hint">Ограничение: от 13 лет</span>':''}${i===3?'<span class="hint">Узнать: /pt all</span>':''}</label><input type="${i===1?'number':'text'}" id="p_${['name','age','nick','time','city'][i]}"${i===1?' min="13"':''}></div>`).join('')}
+              <div class="form-group"><label>1. Имя <span class="required">*</span></label><input type="text" id="p_name" placeholder="Ваше настоящее имя"></div>
+              <div class="form-group"><label>2. Возраст (от 13) <span class="required">*</span></label><input type="number" id="p_age" min="13" placeholder="Ваш возраст"></div>
+              <div class="form-group"><label>3. Игровой никнейм <span class="required">*</span></label><input type="text" id="p_nick" placeholder="Ваш никнейм на сервере"></div>
+              <div class="form-group"><label>4. Наигранное время <span class="required">*</span><span class="hint">Узнать: /pt all</span></label><input type="text" id="p_time" placeholder="Например: 12 часов"></div>
+              <div class="form-group"><label>5. Город проживания <span class="required">*</span><span class="hint">Для уточнения часового пояса</span></label><input type="text" id="p_city" placeholder="Ваш город"></div>
             </div>
             <div class="section"><h2 class="section-title"><i class="fas fa-comment-dots icon green"></i> Развёрнутые вопросы</h2>
-              <div class="form-group"><label>6. Что значит быть Хелпером? <span class="required">*</span><span class="hint">Не менее 5 предложений</span></label><textarea id="p_q6" placeholder="Развёрнутый ответ..."></textarea></div>
-              <div class="form-group"><label>7. Опыт работы <span class="required">*</span><span class="hint">Проекты, должности, причины уходов</span></label><textarea id="p_q7" placeholder="Ответ на три вопроса..."></textarea></div>
-              <div class="form-group"><label>8. Часов в день на сервер? <span class="required">*</span></label><input type="text" id="p_q8" placeholder="Например: 3-4 часа"></div>
-              <div class="form-group"><label>9. О себе <span class="required">*</span><span class="hint">Не менее 5 предложений</span></label><textarea id="p_q9" placeholder="Развёрнутый ответ..."></textarea></div>
+              <div class="form-group"><label>6. Что значит быть Хелпером? Какие обязанности есть у Хелпера? <span class="required">*</span><span class="hint">Не менее 5 предложений</span></label><textarea id="p_q6" placeholder="Напишите развёрнутый ответ..."></textarea></div>
+              <div class="form-group"><label>7. Опыт работы на других проектах <span class="required">*</span><span class="hint">На каких проектах, какие должности, причины уходов</span></label><textarea id="p_q7" placeholder="Опишите ваш опыт..."></textarea></div>
+              <div class="form-group"><label>8. Сколько часов в день готовы уделять серверу? <span class="required">*</span></label><input type="text" id="p_q8" placeholder="Например: 3-4 часа"></div>
+              <div class="form-group"><label>9. Расскажите о себе <span class="required">*</span><span class="hint">Род деятельности, хобби, характер, коммуникативные способности. Не менее 5 предложений.</span></label><textarea id="p_q9" placeholder="Расскажите о себе..."></textarea></div>
             </div>
-            <div class="section"><h2 class="section-title"><i class="fas fa-shuffle icon green"></i> Тест (Вариант #${variant})</h2>
-              ${q.map((item,i)=>{const n='pq'+i;return`<div class="form-group"><label>${i+1}. ${item.q} <span class="required">*</span></label><div class="radio-group" data-g="${n}">${[...item.o].sort(()=>Math.random()-0.5).map(o=>`<label class="radio-option"><input type="radio" name="${n}" value="${item.o.indexOf(o)}"><span>${o}</span></label>`).join('')}<label class="radio-option"><input type="radio" name="${n}" value="other"><span>Другое:</span></label><input type="text" class="other-input" placeholder="Ваш ответ" style="display:none;" data-other="${n}"></div></div>`;}).join('')}
+            <div class="section"><h2 class="section-title"><i class="fas fa-shuffle icon green"></i> Тест на знание правил — Вариант #${variant}</h2>
+              ${q.map((item,i)=>{const n='pq'+i;return`<div class="form-group"><label>${i+1}. ${item.q} <span class="required">*</span></label><div class="radio-group">${[...item.o].sort(()=>Math.random()-0.5).map(o=>`<label class="radio-option"><input type="radio" name="${n}" value="${item.o.indexOf(o)}"><span>${o}</span></label>`).join('')}<label class="radio-option"><input type="radio" name="${n}" value="other"><span>Другое:</span></label><input type="text" class="other-input" style="display:none;" data-other="${n}" placeholder="Введите свой ответ"></div></div>`;}).join('')}
             </div>
             <button class="submit-btn" id="submitPersonnel"><i class="fas fa-paper-plane"></i> Отправить заявку</button>`;
-            document.getElementById('btnBack').addEventListener('click', renderHome);
+
+            document.getElementById('btnBackPersonnel').addEventListener('click', renderHome);
             setupRadios();
             document.getElementById('submitPersonnel').addEventListener('click', () => {
-                const d = ['name', 'age', 'nick', 'time', 'city'].reduce((o, k) => (o[k] = document.getElementById(
-                    'p_' + k).value.trim(), o), {});
-                d.q6 = document.getElementById('p_q6').value.trim();
-                d.q7 = document.getElementById('p_q7').value.trim();
-                d.q8 = document.getElementById('p_q8').value.trim();
-                d.q9 = document.getElementById('p_q9').value.trim();
-                if (Object.values(d).some(v => !v)) {
-                    showToast('❌ Заполните все поля');
-                    return;
-                }
-                if (parseInt(d.age) < 13) {
-                    showToast('❌ Возраст от 13 лет');
-                    return;
-                }
-                if (usedNicknames.personnel.includes(d.nickname.toLowerCase())) {
-                    showToast('❌ Этот никнейм уже подал заявку');
-                    return;
-                }
-                if (countSentences(d.q6) < 5) {
-                    showToast('❌ Вопрос 6: нужно 5 предложений');
-                    return;
-                }
-                if (countSentences(d.q9) < 5) {
-                    showToast('❌ Вопрос 9: нужно 5 предложений');
-                    return;
-                }
+                const d = {
+                    name: document.getElementById('p_name').value.trim(),
+                    age: document.getElementById('p_age').value.trim(),
+                    nickname: document.getElementById('p_nick').value.trim(),
+                    playtime: document.getElementById('p_time').value.trim(),
+                    city: document.getElementById('p_city').value.trim(),
+                    q6: document.getElementById('p_q6').value.trim(),
+                    q7: document.getElementById('p_q7').value.trim(),
+                    q8: document.getElementById('p_q8').value.trim(),
+                    q9: document.getElementById('p_q9').value.trim()
+                };
+                if (Object.values(d).some(v => !v)) { showToast('❌ Заполните все обязательные поля'); return; }
+                if (parseInt(d.age) < 13) { showToast('❌ Возраст должен быть от 13 лет'); return; }
+                if (usedNicknames.personnel.includes(d.nickname.toLowerCase())) { showToast('❌ Этот никнейм уже подал заявку'); return; }
+                if (countSentences(d.q6) < 5) { showToast('❌ Вопрос 6: требуется минимум 5 предложений'); return; }
+                if (countSentences(d.q9) < 5) { showToast('❌ Вопрос 9: требуется минимум 5 предложений'); return; }
                 const answers = [];
                 for (let i = 0; i < q.length; i++) {
                     const n = 'pq' + i;
                     const c = document.querySelector('input[name="' + n + '"]:checked');
-                    if (!c) {
-                        showToast('❌ Ответьте на все вопросы теста');
-                        return;
-                    }
-                    answers.push(c.value === 'other' ? 'Другое: ' + (document.querySelector(
-                            '[data-other="' + n + '"]')?.value || '') : q[i].o[parseInt(c.value)]);
+                    if (!c) { showToast('❌ Ответьте на все вопросы теста'); return; }
+                    answers.push(c.value === 'other' ? 'Другое: ' + (document.querySelector('[data-other="' + n + '"]')?.value || '') : q[i].o[parseInt(c.value)]);
                 }
-                const app = {
-                    ...d,
-                    age: parseInt(d.age),
-                    variant,
-                    answers,
-                    contacts: '',
-                    timestamp: new Date().toISOString(),
-                    id: Date.now()
-                };
+                const app = { ...d, age: parseInt(d.age), variant, answers, contacts: '', timestamp: new Date().toISOString(), id: Date.now() };
                 saveApp('personnel', app);
                 usedNicknames.personnel.push(d.nickname.toLowerCase());
-                showSuccess('personnel');
+                playSuccessAnimation('personnel');
             });
         }
 
-        // ============================================================
-        //  АНКЕТА ПОДДЕРЖКИ
-        // ============================================================
         function renderSupportForm() {
             currentDirection = 'support';
             document.getElementById('dynamicContent').innerHTML = `
-            <button class="btn btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Назад</button>
+            <button class="btn btn-back" id="btnBackSupport"><i class="fas fa-arrow-left"></i> Назад</button>
             <h1 class="main-title"><span class="gradient-text" style="background:linear-gradient(135deg,var(--accent2),var(--accent2-light),var(--accent2),var(--accent2-light));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientMove 6s ease infinite;">🎧 Техническая поддержка</span></h1>
-            <div class="info-banner support-banner"><i class="fas fa-info-circle"></i><div><strong>Важно:</strong> вопросы с <strong>*</strong> требуют развёрнутого ответа (не менее 5 предложений).</div></div>
+            <div class="section support-section"><h2 class="section-title"><i class="fas fa-info-circle icon blue"></i> Важно</h2><p style="font-size:var(--font-sm);color:var(--text-secondary);">Вопросы с <strong style="color:var(--accent2);">*</strong> требуют развёрнутого ответа (не менее 5 предложений).</p></div>
             <div class="section support-section"><h2 class="section-title"><i class="fas fa-user icon blue"></i> Основные данные</h2>
-              ${['Имя','Возраст (от 14)','Никнейм'].map((l,i)=>`<div class="form-group"><label>${i+1}. ${l} <span class="required">*</span>${i===1?'<span class="hint">Ограничение: от 14 лет</span>':''}</label><input type="${i===1?'number':'text'}" id="s_${['name','age','nick'][i]}"${i===1?' min="14"':''}></div>`).join('')}
+              <div class="form-group"><label>1. Имя <span class="required">*</span></label><input type="text" id="s_name" placeholder="Ваше настоящее имя"></div>
+              <div class="form-group"><label>2. Возраст (от 14) <span class="required">*</span></label><input type="number" id="s_age" min="14" placeholder="Ваш возраст"></div>
+              <div class="form-group"><label>3. Игровой никнейм <span class="required">*</span></label><input type="text" id="s_nick" placeholder="Ваш никнейм на сервере"></div>
             </div>
             <div class="section support-section"><h2 class="section-title"><i class="fas fa-comment-dots icon blue"></i> Ситуационные задачи</h2>
-              <div class="form-group"><label>4. Игрок iwi123 просит сбросить пароль на ник Iwwi. Ваш ответ? <span class="required">*</span></label><textarea id="s_q4" placeholder="Ваш ответ..."></textarea></div>
-              <div class="form-group"><label>5. Диалог с игроком (MopsikZloS5) <span class="required">*</span><span class="hint">Ответьте на реплики: 1-Здравствуйте, 2-просит доказательства на бан, 3-до свидания</span></label><textarea id="s_q5" placeholder="1-&#10;2-&#10;3-"></textarea></div>
-              <div class="form-group"><label>6. Ребёнок с ошибками просит сбросить пароль. Ваш ответ? <span class="required">*</span></label><textarea id="s_q6" placeholder="Ваш ответ..."></textarea></div>
-              <div class="form-group"><label>7. Игрок матерится и оскорбляет сервер. Ваши действия? <span class="required">*</span></label><textarea id="s_q7" placeholder="Ваши действия..."></textarea></div>
-              <div class="form-group"><label>8. Игрок с ником "iwi09876". По какому пункту заблокируете? <span class="required">*</span></label>
-                <div class="radio-group" data-g="sq8">
+              <div class="form-group"><label>4. Игрок iwi123 просит сбросить пароль на ник Iwwi. Ваш ответ? <span class="required">*</span></label><textarea id="s_q4" placeholder="Опишите ваши действия..."></textarea></div>
+              <div class="form-group"><label>5. Диалог с игроком (MopsikZloS5) <span class="required">*</span><span class="hint">Ответьте на реплики: 1 — Здравствуйте, 2 — просит доказательства на бан, 3 — до свидания</span></label><textarea id="s_q5" placeholder="1-&#10;2-&#10;3-"></textarea></div>
+              <div class="form-group"><label>6. Ребёнок с ошибками просит сбросить пароль. Ваш ответ? <span class="required">*</span></label><textarea id="s_q6" placeholder="Опишите ваши действия..."></textarea></div>
+              <div class="form-group"><label>7. Игрок матерится и оскорбляет сервер. Ваши действия? <span class="required">*</span></label><textarea id="s_q7" placeholder="Опишите ваши действия..."></textarea></div>
+              <div class="form-group"><label>8. Игрок с ником "iwi09876". По какому пункту правил заблокируете? <span class="required">*</span></label>
+                <div class="radio-group">
                   <label class="radio-option"><input type="radio" name="sq8" value="2.5"><span>2.5</span></label>
                   <label class="radio-option"><input type="radio" name="sq8" value="1.13"><span>1.13</span></label>
                   <label class="radio-option"><input type="radio" name="sq8" value="3.4"><span>3.4</span></label>
                   <label class="radio-option"><input type="radio" name="sq8" value="other"><span>Другое:</span></label>
-                  <input type="text" class="other-input" placeholder="Ваш ответ" style="display:none;" data-other="sq8"></div></div>
-              <div class="form-group"><label>9. Игрок вышел при проверке, просит разбан. Ваш ответ? <span class="required">*</span></label><textarea id="s_q9" placeholder="Ваш ответ..."></textarea></div>
-              <div class="form-group"><label>10. Игрок просит перенести привилегию другу. Ваш ответ? <span class="required">*</span></label><textarea id="s_q10" placeholder="Ваш ответ..."></textarea></div>
+                  <input type="text" class="other-input" style="display:none;" data-other="sq8" placeholder="Введите свой ответ"></div></div>
+              <div class="form-group"><label>9. Игрок вышел при проверке на читы, просит разбан. Ваш ответ? <span class="required">*</span></label><textarea id="s_q9" placeholder="Опишите ваши действия..."></textarea></div>
+              <div class="form-group"><label>10. Игрок просит перенести привилегию другу. Ваш ответ? <span class="required">*</span></label><textarea id="s_q10" placeholder="Опишите ваши действия..."></textarea></div>
             </div>
             <button class="submit-btn support-btn" id="submitSupport"><i class="fas fa-paper-plane"></i> Отправить заявку</button>`;
-            document.getElementById('btnBack').addEventListener('click', renderHome);
+
+            document.getElementById('btnBackSupport').addEventListener('click', renderHome);
             setupRadios();
             document.getElementById('submitSupport').addEventListener('click', () => {
                 const d = {
@@ -1561,62 +571,40 @@
                     q9: document.getElementById('s_q9').value.trim(),
                     q10: document.getElementById('s_q10').value.trim()
                 };
-                if (Object.values(d).some(v => !v)) {
-                    showToast('❌ Заполните все поля');
-                    return;
-                }
-                if (parseInt(d.age) < 14) {
-                    showToast('❌ Возраст от 14 лет');
-                    return;
-                }
-                if (usedNicknames.support.includes(d.nickname.toLowerCase())) {
-                    showToast('❌ Этот никнейм уже подал заявку');
-                    return;
-                }
+                if (Object.values(d).some(v => !v)) { showToast('❌ Заполните все обязательные поля'); return; }
+                if (parseInt(d.age) < 14) { showToast('❌ Возраст должен быть от 14 лет'); return; }
+                if (usedNicknames.support.includes(d.nickname.toLowerCase())) { showToast('❌ Этот никнейм уже подал заявку'); return; }
                 const sq8 = document.querySelector('input[name="sq8"]:checked');
-                if (!sq8) {
-                    showToast('❌ Ответьте на вопрос 8');
-                    return;
-                }
-                const q8ans = sq8.value === 'other' ? 'Другое: ' + (document.querySelector('[data-other="sq8"]')
-                    ?.value || '') : sq8.value;
-                const app = {
-                    ...d,
-                    age: parseInt(d.age),
-                    q8: q8ans,
-                    contacts: '',
-                    timestamp: new Date().toISOString(),
-                    id: Date.now()
-                };
+                if (!sq8) { showToast('❌ Ответьте на вопрос 8'); return; }
+                const q8ans = sq8.value === 'other' ? 'Другое: ' + (document.querySelector('[data-other="sq8"]')?.value || '') : sq8.value;
+                const app = { ...d, age: parseInt(d.age), q8: q8ans, contacts: '', timestamp: new Date().toISOString(), id: Date.now() };
                 saveApp('support', app);
                 usedNicknames.support.push(d.nickname.toLowerCase());
-                showSuccess('support');
+                playSuccessAnimation('support');
             });
         }
 
-        // ============================================================
-        //  АНКЕТА МЕДИА
-        // ============================================================
         function renderMediaForm() {
             currentDirection = 'media';
             document.getElementById('dynamicContent').innerHTML = `
-            <button class="btn btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Назад</button>
+            <button class="btn btn-back" id="btnBackMedia"><i class="fas fa-arrow-left"></i> Назад</button>
             <h1 class="main-title"><span class="gradient-text" style="background:linear-gradient(135deg,var(--accent3),var(--accent3-light),var(--accent3),var(--accent3-light));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientMove 6s ease infinite;">🎬 Медиа-деятельность</span></h1>
-            <div class="sub-header">Снимайте контент — получайте игровую валюту! Связь: <a href="https://t.me/alfdv_bot" target="_blank" rel="noopener">@alfdv_bot</a></div>
+            <div class="sub-header">Снимайте контент — получайте игровую валюту! Связь: <a href="https://t.me/alfdv_bot" target="_blank">@alfdv_bot</a></div>
             <div class="section media-section"><h2 class="section-title"><i class="fas fa-video icon orange"></i> Заявка ютубера</h2>
               <div class="form-group"><label>1. Ваш никнейм <span class="required">*</span></label><input type="text" id="m_nick" placeholder="Игровой никнейм"></div>
               <div class="form-group"><label>2. Ссылка на канал <span class="required">*</span></label><input type="text" id="m_link" placeholder="YouTube / VK Видео / TikTok"></div>
               <div class="form-group"><label>3. Примерные обороты (просмотры, лайки) <span class="required">*</span></label><input type="text" id="m_stats" placeholder="Например: 500 просмотров, 50 лайков"></div>
               <div class="form-group"><label>4. Сколько времени готовы уделять? <span class="required">*</span></label><input type="text" id="m_time" placeholder="Часов в день/неделю"></div>
               <div class="form-group"><label>5. Готовы создавать 2-3 видео в неделю? <span class="required">*</span></label>
-                <div class="radio-group" data-g="mq5">
+                <div class="radio-group">
                   <label class="radio-option"><input type="radio" name="mq5" value="Да, готов(а)"><span>Да, готов(а)</span></label>
                   <label class="radio-option"><input type="radio" name="mq5" value="Нет, меньше"><span>Нет, меньше</span></label>
                   <label class="radio-option"><input type="radio" name="mq5" value="Другое"><span>Другое:</span></label>
-                  <input type="text" class="other-input" placeholder="Ваш ответ" style="display:none;" data-other="mq5"></div></div>
+                  <input type="text" class="other-input" style="display:none;" data-other="mq5" placeholder="Введите свой ответ"></div></div>
             </div>
             <button class="submit-btn media-btn" id="submitMedia"><i class="fas fa-paper-plane"></i> Отправить заявку</button>`;
-            document.getElementById('btnBack').addEventListener('click', renderHome);
+
+            document.getElementById('btnBackMedia').addEventListener('click', renderHome);
             setupRadios();
             document.getElementById('submitMedia').addEventListener('click', () => {
                 const nickname = document.getElementById('m_nick').value.trim();
@@ -1624,88 +612,36 @@
                 const stats = document.getElementById('m_stats').value.trim();
                 const time = document.getElementById('m_time').value.trim();
                 const mq5 = document.querySelector('input[name="mq5"]:checked');
-                if (!nickname || !link || !stats || !time || !mq5) {
-                    showToast('❌ Заполните все поля');
-                    return;
-                }
-                const q5ans = mq5.value === 'Другое' ? 'Другое: ' + (document.querySelector('[data-other="mq5"]')
-                    ?.value || '') : mq5.value;
-                const app = {
-                    nickname,
-                    link,
-                    stats,
-                    time,
-                    q5: q5ans,
-                    contacts: '',
-                    timestamp: new Date().toISOString(),
-                    id: Date.now()
-                };
+                if (!nickname || !link || !stats || !time || !mq5) { showToast('❌ Заполните все обязательные поля'); return; }
+                const q5ans = mq5.value === 'Другое' ? 'Другое: ' + (document.querySelector('[data-other="mq5"]')?.value || '') : mq5.value;
+                const app = { nickname, link, stats, time, q5: q5ans, contacts: '', timestamp: new Date().toISOString(), id: Date.now() };
                 saveApp('media', app);
-                showSuccess('media');
+                playSuccessAnimation('media');
             });
         }
 
         function setupRadios() {
             document.querySelectorAll('.radio-option').forEach(o => o.addEventListener('click', function() {
-                const r = this.querySelector('input');
-                if (r) r.checked = true;
-                const g = this.closest('.radio-group');
-                g.querySelectorAll('.radio-option').forEach(x => x.classList.remove('selected'));
+                const r = this.querySelector('input'); if(r) r.checked = true;
+                const g = this.closest('.radio-group'); g.querySelectorAll('.radio-option').forEach(x => x.classList.remove('selected'));
                 this.classList.add('selected');
-                const oi = g.querySelector('.other-input');
-                if (oi) oi.style.display = r && (r.value === 'other' || r.value === 'Другое') ? 'block' :
-                    'none';
+                const oi = g.querySelector('.other-input'); if(oi) oi.style.display = (r && (r.value === 'other' || r.value === 'Другое')) ? 'block' : 'none';
             }));
         }
 
-        function showSuccess(dir) {
-            document.getElementById('dynamicContent').innerHTML = `
-            <div class="success-block show">
-              <div class="success-icon">${icons[dir]}</div>
-              <h2 class="success-title">Заявка принята!</h2>
-              <div class="success-text">Вы подали заявку в направление <strong>${labels[dir]}</strong>. Ожидайте итогов в Telegram.</div>
-              <div class="form-group"><label>Оставьте контакты (Telegram / VK)</label><input type="text" id="contacts" placeholder="@username или ссылка"></div>
-              <button class="submit-btn" id="saveContactsBtn"><i class="fas fa-save"></i> Сохранить контакты</button>
-              <button class="btn btn-back" id="successBack" style="margin-top:10px;color:var(--text)!important;border:1px solid var(--border);background:var(--glass);"><i class="fas fa-home"></i> На главную</button>
-            </div>`;
-            document.getElementById('saveContactsBtn').addEventListener('click', () => {
-                const c = document.getElementById('contacts').value.trim();
-                if (!c) {
-                    showToast('❌ Введите контакты');
-                    return;
-                }
-                const apps = getApps(dir);
-                if (apps.length > 0) {
-                    apps[apps.length - 1].contacts = c;
-                    localStorage.setItem(STORAGE_KEYS[dir], JSON.stringify(apps));
-                }
-                showToast('✅ Контакты сохранены!');
-                document.getElementById('saveContactsBtn').style.display = 'none';
-                document.getElementById('contacts').disabled = true;
-            });
-            document.getElementById('successBack').addEventListener('click', renderHome);
-        }
-
-        // ============================================================
-        //  АДМИН-ПАНЕЛЬ
-        // ============================================================
         function showAdminLogin() {
             document.getElementById('dynamicContent').innerHTML = `
-            <div style="max-width:400px;margin:40px auto;text-align:center;">
-              <h2 class="section-title" style="justify-content:center;"><i class="fas fa-lock icon green"></i> Вход в админ-панель</h2>
-              <div class="form-group"><input type="password" id="adminPass" placeholder="Введите пароль"></div>
+            <div style="max-width:420px;margin:60px auto;text-align:center;">
+              <div style="font-size:48px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-shield-halved"></i></div>
+              <h2 class="section-title" style="justify-content:center;font-size:var(--font-xl);">Доступ к админ-панели</h2>
+              <p style="color:var(--text-secondary);margin-bottom:20px;font-size:var(--font-sm);">Введите пароль для продолжения</p>
+              <div class="form-group"><input type="password" id="adminPass" placeholder="Пароль" style="text-align:center;font-size:16px;"></div>
               <button class="submit-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Войти</button>
-              <button class="logout-btn" id="cancelBtn" style="margin-top:10px;">Отмена</button>
+              <button class="btn btn-back" id="cancelBtn" style="margin-top:12px;width:100%;">Отмена</button>
             </div>`;
             document.getElementById('loginBtn').addEventListener('click', () => {
-                if (document.getElementById('adminPass').value !== ADMIN_PASS) {
-                    showToast('❌ Неверный пароль');
-                    return;
-                }
-                isAdmin = true;
-                adminTab = 'personnel';
-                currentSearchFilter = '';
-                renderAdminPanel();
+                if (document.getElementById('adminPass').value !== ADMIN_PASS) { showToast('❌ Неверный пароль'); return; }
+                isAdmin = true; adminTab = 'personnel'; currentSearchFilter = ''; renderAdminPanel();
             });
             document.getElementById('cancelBtn').addEventListener('click', renderHome);
             document.getElementById('headerActions').innerHTML = '';
@@ -1713,168 +649,74 @@
 
         function renderAdminPanel() {
             const toggles = getToggles();
-            const tabs = ['personnel', 'support', 'media'];
-            const tabLabels = {
-                personnel: '🛡️ Персонал',
-                support: '🎧 Поддержка',
-                media: '🎬 Медиа'
-            };
-            document.getElementById('headerActions').innerHTML =
-                `<button class="btn btn-back" id="adminExit"><i class="fas fa-sign-out-alt"></i> Выйти</button>`;
-            document.getElementById('adminExit').addEventListener('click', () => {
-                isAdmin = false;
-                renderHome();
-            });
+            const tabs = ['personnel','support','media'];
+            const tabLabels = { personnel: '🛡️ Персонал', support: '🎧 Поддержка', media: '🎬 Медиа' };
+            document.getElementById('headerActions').innerHTML = '<button class="btn btn-back" id="adminExit"><i class="fas fa-sign-out-alt"></i> Выйти</button>';
+            document.getElementById('adminExit').addEventListener('click', () => { isAdmin = false; renderHome(); });
             document.getElementById('appContainer').classList.add('wide');
             document.getElementById('dynamicContent').innerHTML = `
             <h1 class="main-title"><span class="gradient-text">🔐 Админ-панель</span></h1>
-            <div class="admin-tabs">${tabs.map(t=>`<button class="admin-tab${adminTab===t?' active':''}" data-tab="${t}">${tabLabels[t]}</button>`).join('')}</div>
-            ${tabs.map(t=>`
-            <div class="toggle-row">
-              <span class="toggle-label">${tabLabels[t]}:</span>
-              <label class="toggle-switch"><input type="checkbox" id="tgl_${t}" ${toggles[t]?'checked':''} disabled><span class="toggle-slider"></span></label>
-              <span class="toggle-status">${toggles[t]?'✅ Открыт':'🔒 Закрыт'}</span>
-              <span class="toggle-hint">(меняется в коде)</span>
-            </div>`).join('')}
-            <div id="adminTableArea"></div>`;
-            document.querySelectorAll('.admin-tab').forEach(b => b.addEventListener('click', function() {
-                adminTab = this.dataset.tab;
-                currentSearchFilter = '';
-                renderAdminPanel();
-            }));
+            <div class="admin-card">
+              <div class="admin-tabs">${tabs.map(t=>`<button class="admin-tab${adminTab===t?' active':''}" data-tab="${t}">${tabLabels[t]}</button>`).join('')}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+                ${tabs.map(t=>`<div class="toggle-row" style="flex:1;min-width:180px;"><span class="toggle-label">${tabLabels[t]}</span><label class="toggle-switch"><input type="checkbox" disabled ${toggles[t]?'checked':''}><span class="toggle-slider"></span></label><span style="font-size:11px;color:var(--text-secondary);">${toggles[t]?'Открыт':'Закрыт'}</span></div>`).join('')}
+              </div>
+              <p style="font-size:11px;color:var(--text-secondary);margin-bottom:14px;">⚙️ Состояние наборов меняется в коде файла (RECRUITMENT_SETTINGS)</p>
+              <div id="adminTableArea"></div>
+            </div>`;
+            document.querySelectorAll('.admin-tab').forEach(b => b.addEventListener('click', function() { adminTab = this.dataset.tab; currentSearchFilter = ''; renderAdminPanel(); }));
             renderAdminTable();
         }
 
         function renderAdminTable() {
             let apps = getApps(adminTab);
-            if (currentSearchFilter) {
-                const f = currentSearchFilter.toLowerCase().trim();
-                apps = apps.filter(a =>
-                    (a.nickname || '').toLowerCase().includes(f) ||
-                    (a.name || '').toLowerCase().includes(f) ||
-                    (a.city || '').toLowerCase().includes(f)
-                );
-            }
+            const totalAll = apps.length;
+            if (currentSearchFilter) { const f = currentSearchFilter.toLowerCase().trim(); apps = apps.filter(a => (a.nickname||'').toLowerCase().includes(f) || (a.name||'').toLowerCase().includes(f) || (a.city||'').toLowerCase().includes(f)); }
             const area = document.getElementById('adminTableArea');
             let html = `
-            <div class="stats-bar">
-              <div class="stat-card"><div class="stat-num">${apps.length}</div><div class="stat-label">Всего заявок</div></div>
+            <div class="admin-stats">
+              <div class="admin-stat"><div class="stat-value">${totalAll}</div><div class="stat-label">Всего заявок</div></div>
+              <div class="admin-stat"><div class="stat-value">${apps.length}</div><div class="stat-label">${currentSearchFilter ? 'Найдено' : 'Показано'}</div></div>
             </div>
-            <div class="admin-search-bar">
-              <input type="text" id="searchInput" placeholder="🔍 Поиск по нику, имени, городу..." value="${escapeHtml(currentSearchFilter)}">
-              <button class="btn btn-back" id="clearSearchBtn" style="${currentSearchFilter?'':'display:none;'}">✕ Очистить</button>
+            <div class="admin-search">
+              <input type="text" id="searchInput" placeholder="🔍 Поиск по нику, имени или городу..." value="${escapeHtml(currentSearchFilter)}">
+              ${currentSearchFilter ? '<button class="btn btn-back" id="clearSearchBtn" style="white-space:nowrap;"><i class="fas fa-times"></i> Очистить</button>' : ''}
             </div>
-            <div class="admin-actions-row">
-              <button class="btn btn-danger" id="clearAllBtn"><i class="fas fa-trash-alt"></i> Удалить все заявки</button>
+            <div class="admin-actions">
+              <button class="btn btn-danger" id="clearAllBtn"><i class="fas fa-trash-alt"></i> Удалить все заявки (${totalAll})</button>
               <button class="btn btn-back" id="refreshBtn"><i class="fas fa-sync-alt"></i> Обновить</button>
             </div>
             <div class="table-wrapper">
               <table class="admin-table">
-                <thead><tr><th>Дата</th><th>Ник</th><th>Имя</th><th>Контакты</th><th>Действ.</th></tr></thead>
+                <thead><tr><th>📅 Дата</th><th>🎮 Никнейм</th><th>👤 Имя</th><th>📞 Контакты</th><th>⚙️ Действия</th></tr></thead>
                 <tbody>`;
             if (!apps.length) {
-                html +=
-                    '<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--text-secondary);">Нет заявок</td></tr>';
+                html += `<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-secondary);"><div style="font-size:40px;margin-bottom:10px;">📭</div>Нет заявок${currentSearchFilter ? ' по вашему запросу' : ''}</td></tr>`;
             } else {
                 apps.forEach(a => {
                     html += `
                 <tr id="r${a.id}">
-                  <td>${new Date(a.timestamp).toLocaleDateString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td>
-                  <td><strong>${escapeHtml(a.nickname||'')}</strong></td>
-                  <td>${escapeHtml(a.name||'')}</td>
+                  <td style="white-space:nowrap;">${new Date(a.timestamp).toLocaleDateString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td>
+                  <td class="nick-cell">${escapeHtml(a.nickname||'—')}</td>
+                  <td>${escapeHtml(a.name||'—')}</td>
                   <td>${escapeHtml(a.contacts||'—')}</td>
                   <td>
-                    <button class="expand-btn" data-id="${a.id}">📋</button>
-                    <button class="delete-btn" data-id="${a.id}">🗑</button>
+                    <div class="action-btns">
+                      <button class="icon-btn expand-btn" data-id="${a.id}" title="Подробнее">📋</button>
+                      <button class="icon-btn delete-btn" data-id="${a.id}" title="Удалить">🗑</button>
+                    </div>
                   </td>
                 </tr>`;
                 });
             }
             html += '</tbody></table></div>';
             area.innerHTML = html;
-
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                let searchTimeout;
-                searchInput.addEventListener('input', function() {
-                    clearTimeout(searchTimeout);
-                    const val = this.value;
-                    searchTimeout = setTimeout(() => {
-                        currentSearchFilter = val;
-                        renderAdminTable();
-                    }, 200);
-                });
-                setTimeout(() => {
-                    searchInput.focus();
-                    searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
-                }, 50);
-            }
-
-            const clearSearchBtn = document.getElementById('clearSearchBtn');
-            if (clearSearchBtn) {
-                clearSearchBtn.addEventListener('click', () => {
-                    currentSearchFilter = '';
-                    renderAdminTable();
-                });
-            }
-
-            const clearAllBtn = document.getElementById('clearAllBtn');
-            if (clearAllBtn) {
-                clearAllBtn.addEventListener('click', () => {
-                    if (apps.length === 0) {
-                        showToast('📭 Нет заявок для удаления');
-                        return;
-                    }
-                    if (!confirm(
-                            `🗑 Вы уверены, что хотите удалить ВСЕ заявки из раздела «${labels[adminTab]}»?\n\nКоличество: ${apps.length}\n\nЭто действие нельзя отменить!`
-                            )) {
-                        return;
-                    }
-                    if (!confirm(
-                            `⚠️ ПОДТВЕРДИТЕ удаление всех заявок из раздела «${labels[adminTab]}».\n\nНажмите «ОК» для удаления.»
-                            )) {
-                        return;
-                    }
-                    clearAllApps(adminTab);
-                    showToast('🗑 Все заявки удалены');
-                    renderAdminTable();
-                });
-            }
-
-            const refreshBtn = document.getElementById('refreshBtn');
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', () => {
-                    renderAdminTable();
-                    showToast('🔄 Обновлено');
-                });
-            }
-
-            area.querySelectorAll('.expand-btn').forEach(b => b.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                const er = document.getElementById('det' + id);
-                if (er) {
-                    er.remove();
-                    return;
-                }
-                const app = getApps(adminTab).find(a => a.id === id);
-                if (!app) return;
-                const tr = document.createElement('tr');
-                tr.id = 'det' + id;
-                tr.className = 'detail-row';
-                tr.innerHTML =
-                    `<td colspan="5">${Object.entries(app).filter(([k])=>!['id','timestamp','contacts'].includes(k)).map(([k,v])=>'<strong>'+k+':</strong> '+escapeHtml(typeof v==='object'?JSON.stringify(v):v)).join('<br><br>')}</td>`;
-                this.closest('tr').after(tr);
-            }));
-
-            area.querySelectorAll('.delete-btn').forEach(b => b.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                if (!confirm('🗑 Удалить заявку #' + id + ' навсегда?')) return;
-                const apps = getApps(adminTab).filter(a => a.id !== id);
-                localStorage.setItem(STORAGE_KEYS[adminTab], JSON.stringify(apps));
-                loadUsedNicknames();
-                renderAdminTable();
-                showToast('🗑 Заявка удалена');
-            }));
+            const si = document.getElementById('searchInput'); if(si) { let t; si.addEventListener('input', function() { clearTimeout(t); t = setTimeout(() => { currentSearchFilter = this.value; renderAdminPanel(); }, 300); }); setTimeout(() => si.focus(), 100); }
+            const csb = document.getElementById('clearSearchBtn'); if(csb) csb.addEventListener('click', () => { currentSearchFilter = ''; renderAdminPanel(); });
+            const cab = document.getElementById('clearAllBtn'); if(cab) cab.addEventListener('click', () => { if(!apps.length) { showToast('📭 Нет заявок для удаления'); return; } if(!confirm(`⚠️ Вы уверены, что хотите удалить ВСЕ заявки из раздела «${labels[adminTab]}»?\n\nКоличество: ${totalAll}\n\nЭто действие нельзя отменить!`)) return; if(!confirm('🗑 ПОДТВЕРЖДАЮ удаление всех заявок')) return; clearAllApps(adminTab); showToast('🗑 Все заявки удалены'); renderAdminPanel(); });
+            const rb = document.getElementById('refreshBtn'); if(rb) rb.addEventListener('click', () => { renderAdminPanel(); showToast('🔄 Обновлено'); });
+            area.querySelectorAll('.expand-btn').forEach(b => b.addEventListener('click', function() { const id = parseInt(this.dataset.id); const er = document.getElementById('det'+id); if(er) { er.remove(); return; } const app = getApps(adminTab).find(a => a.id === id); if(!app) return; const tr = document.createElement('tr'); tr.id = 'det'+id; tr.className = 'detail-row'; tr.innerHTML = `<td colspan="5">${Object.entries(app).filter(([k])=>!['id','timestamp','contacts'].includes(k)).map(([k,v])=>'<strong>'+k+':</strong> '+escapeHtml(typeof v==='object'?JSON.stringify(v):v)).join('<br><br>')}</td>`; this.closest('tr').after(tr); tr.scrollIntoView({behavior:'smooth',block:'nearest'}); }));
+            area.querySelectorAll('.delete-btn').forEach(b => b.addEventListener('click', function() { const id = parseInt(this.dataset.id); if(!confirm('Удалить заявку #'+id+' навсегда?')) return; const apps = getApps(adminTab).filter(a => a.id !== id); localStorage.setItem(STORAGE_KEYS[adminTab], JSON.stringify(apps)); loadUsedNicknames(); renderAdminPanel(); showToast('🗑 Заявка удалена'); }));
         }
 
         init();
