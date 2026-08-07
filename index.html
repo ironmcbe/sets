@@ -7,15 +7,13 @@
     <title>Набор в команду | IronMine</title>
 
     <!-- ============================================================
-    НАСТРОЙКИ НАБОРОВ (меняй тут перед заливкой на GitHub)
-    true = набор открыт | false = набор закрыт
+    НАСТРОЙКИ (Google Sheets API)
+    CSV — чтение состояния наборов
+    SCRIPT — запись изменений (тумблеры в админке)
     ============================================================ -->
     <script>
-        const RECRUITMENT_SETTINGS = {
-            personnel: true, // Персонал
-            support: true, // Поддержка
-            media: true // Медиа
-        };
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRaO-Ip0G1j5lQs9-5iR-_F2hK4emPvYKEp6_Qz1kgJqwzsprpa3PBRmfNxFOphtgiIGqSkwHn20IUz/pub?output=csv';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybzaxbCm8dDXk8Xgh4tr4E2Q1P6OuAbMWgazb2xXklsSyAaVIdQywiXjgONg_HX0uWAA/exec';
     </script>
     <!-- ============================================================ -->
 
@@ -780,10 +778,20 @@
         input:checked+.toggle-slider::before {
             transform: translateX(22px);
         }
-        .toggle-hint {
+        .toggle-status {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .toggle-saving {
             font-size: 10px;
-            color: var(--text-muted);
-            margin-left: 4px;
+            color: var(--accent);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .toggle-saving.show {
+            opacity: 1;
         }
         .table-wrapper {
             overflow-x: auto;
@@ -975,10 +983,41 @@
         let isAdmin = false;
         let adminTab = 'personnel';
         let usedNicknames = { personnel: [], support: [], media: [] };
+        let recruitmentToggles = { personnel: true, support: true, media: true };
         const labels = { personnel: 'Персонал', support: 'Поддержка', media: 'Медиа' };
         const icons = { personnel: '🛡️', support: '🎧', media: '🎬' };
 
-        function getToggles() { return RECRUITMENT_SETTINGS; }
+        async function fetchToggles() {
+            try {
+                const resp = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
+                const text = await resp.text();
+                const lines = text.trim().split('\n');
+                lines.forEach(line => {
+                    const [key, val] = line.split(',');
+                    if (key && val && recruitmentToggles.hasOwnProperty(key.trim())) {
+                        recruitmentToggles[key.trim()] = val.trim().toUpperCase() === 'TRUE';
+                    }
+                });
+            } catch (e) {
+                console.warn('Не удалось загрузить состояние наборов, используются значения по умолчанию');
+            }
+        }
+
+        async function saveToggle(direction, value) {
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ direction, value })
+                });
+                recruitmentToggles[direction] = value;
+            } catch (e) {
+                console.warn('Не удалось сохранить состояние набора');
+            }
+        }
+
+        function getToggles() { return recruitmentToggles; }
 
         function getApps(dir) { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS[dir]) || '[]'); } catch (e) { return []; } }
 
@@ -1002,7 +1041,8 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => t.classList.remove('show'), 2800); }
 
-        function init() {
+        async function init() {
+            await fetchToggles();
             loadUsedNicknames();
             initTheme();
             initScroll();
@@ -1309,7 +1349,8 @@
             document.getElementById('cancelBtn').addEventListener('click', renderHome);
         }
 
-        function renderAdminPanel() {
+        async function renderAdminPanel() {
+            await fetchToggles();
             const toggles = getToggles();
             const tabs = ['personnel', 'support', 'media'];
             const tabLabels = { personnel: '🛡️ Персонал', support: '🎧 Поддержка', media: '🎬 Медиа' };
@@ -1324,14 +1365,28 @@
             ${tabs.map(t=>`
             <div class="toggle-row">
               <span class="toggle-label">${tabLabels[t]}:</span>
-              <label class="toggle-switch"><input type="checkbox" id="tgl_${t}" ${toggles[t]?'checked':''} disabled><span class="toggle-slider"></span></label>
-              <span style="font-size:12px;color:var(--text-secondary);">${toggles[t]?'Открыт':'Закрыт'} <span class="toggle-hint">(меняется в коде)</span></span>
+              <label class="toggle-switch"><input type="checkbox" id="tgl_${t}" ${toggles[t]?'checked':''}><span class="toggle-slider"></span></label>
+              <span class="toggle-status" id="status_${t}">${toggles[t]?'✅ Открыт':'🔒 Закрыт'}</span>
+              <span class="toggle-saving" id="saving_${t}">💾 Сохранение...</span>
             </div>`).join('')}
             <div id="adminTableArea"></div>`;
             document.querySelectorAll('.admin-tab').forEach(b => b.addEventListener('click', function() { adminTab = this.dataset
                     .tab;
                 try { sessionStorage.setItem('im_admin_tab', adminTab); } catch (e) {}
                 renderAdminPanel(); }));
+            tabs.forEach(t => {
+                document.getElementById('tgl_' + t).addEventListener('change', async function() {
+                    const val = this.checked;
+                    const statusEl = document.getElementById('status_' + t);
+                    const savingEl = document.getElementById('saving_' + t);
+                    statusEl.textContent = '⏳ Сохранение...';
+                    savingEl.classList.add('show');
+                    await saveToggle(t, val);
+                    statusEl.textContent = val ? '✅ Открыт' : '🔒 Закрыт';
+                    setTimeout(() => savingEl.classList.remove('show'), 1500);
+                    showToast(val ? '✅ Набор открыт' : '🔒 Набор закрыт');
+                });
+            });
             renderAdminTable();
         }
 
